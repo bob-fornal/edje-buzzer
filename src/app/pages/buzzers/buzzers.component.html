@@ -1,0 +1,11 @@
+
+<div class="wrapper--outer">
+  <div class="wrapper--inner">
+
+    <div class="buzzer" (click)="toggleBuzzer()">
+      <img class="image" [class.active]="active === true" src="assets/images/buzzer-green.png" />
+      <img class="image" [class.active]="active === false" src="assets/images/buzzer-red.png" />
+    </div>
+    
+  </div>
+</div>
