@@ -1,7 +1,48 @@
 
 <div class="wrapper">
-  <div class="links">
-    <div class="link" (click)="copyDisplay()">Display <mat-icon>content_copy</mat-icon> </div>
-    <div class="link" (click)="copyBuzzer()">Buzzers <mat-icon>content_copy</mat-icon> </div>
+
+  <div class="left-wrapper width-30">
+    
+    <mat-card class="card pale-yellow">
+      <mat-card-title>Teams</mat-card-title>
+      <mat-card-content>
+        <div class="link" *ngFor="let team of teams">
+          <span class="label">{{ team.title }}</span>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-flat-button color="primary">Edit</button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="card pale-green">
+      <mat-card-title>Links</mat-card-title>
+      <mat-card-content>
+        <div class="link" (click)="copyDisplay()">
+          <span class="label">
+            Copy Link for
+          </span>
+          <span class="highlight">
+            <span>Display</span>
+            <mat-icon>content_copy</mat-icon>
+          </span>
+        </div>
+        <div class="link" (click)="copyBuzzer()">
+          <span class="label">
+            Copy Link for
+          </span>
+          <span class="highlight">
+            <span>Buzzers</span>
+            <mat-icon>content_copy</mat-icon>
+          </span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
   </div>
+
+  <div class="right-wrapper width-70">
+
+  </div>
+
 </div>
