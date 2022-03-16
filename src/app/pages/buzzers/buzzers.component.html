@@ -9,3 +9,9 @@
     
   </div>
 </div>
+
+<div class="active-audio">
+  <ng-container *ngFor="let src of songs; let index = index;">
+    <audio [id]="'audio--' + index" [src]="src" controls="" ></audio>
+  </ng-container>
+</div>

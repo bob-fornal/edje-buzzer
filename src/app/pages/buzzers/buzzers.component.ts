@@ -12,6 +12,8 @@ export class BuzzersComponent implements OnInit {
 
   active: boolean = true;
 
+  songs: Array<string> = [];
+
   constructor(
     private route: ActivatedRoute,
     private socket: SocketService
@@ -23,10 +25,19 @@ export class BuzzersComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.songs = this.route.snapshot.data['songs'];
+    console.log(this.songs);
+  }
 
   toggleBuzzer = () => {
     this.active = !this.active;
+    
+    if (this.active === false) {
+      const random = Math.floor(Math.random() * (this.songs.length));
+      const audio = <HTMLVideoElement>document.getElementById(`audio--${ random }`);
+      audio.play();  
+    }
   };
 
 }
