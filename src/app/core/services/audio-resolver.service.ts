@@ -1,25 +1,33 @@
 
 import { Injectable } from '@angular/core';
-import { Resolve } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AudioResolverService implements Resolve<Promise<Array<string>>> {
+export class AudioService {
 
   audioFiles = [
     './assets/audio/dave--good-evening.mp3',
     './assets/audio/dave--i-cant-do-that.mp3',
     './assets/audio/dave--serve-no-purpose.mp3',
   ];
+  audioConnections: Array<any> = [];
 
-  constructor() { }
+  constructor() {
+    for (let i = 0, len = this.audioFiles.length; i < len; i++) {
+      const audio = this.preloadAudio(this.audioFiles[i]);
+      this.audioConnections.push(audio);
+    }
+  }
 
-  resolve = (): Promise<Array<string>> => Promise.all(this.audioFiles.map(this.preloadAudio));
+  play = (index: number) => {
+    this.audioConnections[index].play();
+  };
 
-  preloadAudio = (url: string): Promise<string> => {
+  preloadAudio = (url: string): any => {
     const audio = new Audio();
     audio.src = url;
-    return new Promise((resolve, reject) => audio.addEventListener('canplaythrough', () => resolve(url), false));
+    audio.preload = 'auto';
+    return audio;
   }
 }

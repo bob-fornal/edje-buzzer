@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { SocketService } from '@core/services/socket.service';
+import { AudioService } from '@core/services/audio-resolver.service';
 
 @Component({
   selector: 'app-buzzers',
@@ -12,9 +13,8 @@ export class BuzzersComponent implements OnInit {
 
   active: boolean = true;
 
-  songs: Array<string> = [];
-
   constructor(
+    private audio: AudioService,
     private route: ActivatedRoute,
     private socket: SocketService
   ) {
@@ -25,18 +25,16 @@ export class BuzzersComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.songs = this.route.snapshot.data['songs'];
-    console.log(this.songs);
-  }
+  ngOnInit(): void { }
 
   toggleBuzzer = () => {
+    if (this.active === false) return;
+    
     this.active = !this.active;
     
     if (this.active === false) {
-      const random = Math.floor(Math.random() * (this.songs.length));
-      const audio = <HTMLVideoElement>document.getElementById(`audio--${ random }`);
-      audio.play();  
+      const randomIndex = Math.floor(Math.random() * (this.audio.audioFiles.length));
+      this.audio.play(randomIndex);  
     }
   };
 
