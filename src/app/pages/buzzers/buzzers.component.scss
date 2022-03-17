@@ -76,6 +76,7 @@
   }
   .wrapper--inner {
     display: grid;
+    position: relative;
 
     border: 2px solid black;
     margin: auto;
@@ -98,5 +99,25 @@
   }
   &:not(.active) {
     display: none;
+  }
+}
+
+.team-selection {
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  max-width: 300px;
+  width: 300px;
+  margin-left: calc(calc(calc(100vw - 300px) - 4rem) / 2);
+  margin-top: calc(calc(calc(100vh - 270px) - 4rem) / 2);
+
+  background-color: black;
+  border: 2px solid gray;
+
+  padding: 2rem;
+
+  .team-row {
+    display: block;
   }
 }

@@ -9,6 +9,10 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 import { ManagementComponent } from './pages/management/management.component';
 import { DisplayComponent } from './pages/display/display.component';
@@ -30,7 +34,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ClipboardModule,
     MatButtonModule,
     MatCardModule,
-    MatIconModule
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [
