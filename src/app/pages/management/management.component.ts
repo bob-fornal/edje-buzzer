@@ -2,7 +2,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Clipboard } from '@angular/cdk/clipboard';
 
+import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
+
+import { LocalstorageService } from '@core/services/localstorage.service';
 import { SocketService } from '@core/services/socket.service';
+
 import { Team } from '@core/interfaces/team';
 
 @Component({
@@ -12,8 +16,11 @@ import { Team } from '@core/interfaces/team';
 })
 export class ManagementComponent implements OnInit {
 
+  // HIDDEN KEY: kbfzwq1taOwqDyw7GjgDZDZCd6QByYU8uC2B6kGj
   origin: string = '';
-  key: string = 'kbfzwq1taOwqDyw7GjgDZDZCd6QByYU8uC2B6kGj';
+  key: string = '';
+
+  term$: Subject<string> = new Subject<string>();
 
   teams: Array<Team> = [
     { id: '1', title: 'Team 1' },
@@ -22,14 +29,29 @@ export class ManagementComponent implements OnInit {
   ];
 
   constructor(
-    private clipboard: Clipboard,
-    private socket: SocketService
+    public clipboard: Clipboard,
+    public storage: LocalstorageService,
+    public socket: SocketService
   ) {
+    this.init();
     this.origin = location.origin;
     // this.socket.setApiKey(this.key);
   }
 
   ngOnInit(): void { }
+
+  init = (): void => {
+    this.term$.pipe(
+      debounceTime(1000),
+      distinctUntilChanged()
+    ).subscribe((value: string): void => {
+      this.setCurrentKey(value);
+    });
+
+    const storedKey: any = this.storage.getKey();
+    const assignKey: string = (storedKey === null) ? '' : storedKey;
+    this.key = assignKey;
+  };
 
   copyDisplay = (): void => {
     const url: string = `${ this.origin }/edje-display/${ this.key }`;
@@ -40,5 +62,11 @@ export class ManagementComponent implements OnInit {
     const url: string = `${ this.origin }/buzzers/${ this.key }`;
     this.clipboard.copy(url);
   };
+  
+  setCurrentKey(key: string): void {
+    if (key.length === 0) return;
+
+    this.storage.setKey(key);
+  }
 
 }

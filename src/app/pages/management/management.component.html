@@ -42,7 +42,10 @@
   </div>
 
   <div class="right-wrapper width-70">
-
+    <mat-form-field class="key-input" appearance="fill" color="primary">
+      <mat-label>PieSocket Key</mat-label>
+      <input matInput placeholder="enter key" [(ngModel)]="key" (ngModelChange)="term$.next($event)" />
+    </mat-form-field>
   </div>
 
 </div>
