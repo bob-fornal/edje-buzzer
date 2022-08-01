@@ -6,11 +6,12 @@ import { Injectable } from '@angular/core';
 })
 export class AudioService {
 
-  audioFiles = [
-    './assets/audio/dave--good-evening.mp3',
-    './assets/audio/dave--i-cant-do-that.mp3',
-    './assets/audio/dave--serve-no-purpose.mp3',
-  ];
+  // audioFiles = [
+  //   './assets/audio/dave--good-evening.mp3',
+  //   './assets/audio/dave--i-cant-do-that.mp3',
+  //   './assets/audio/dave--serve-no-purpose.mp3',
+  // ];
+  audioFiles = [];
   audioConnections: Array<any> = [];
 
   constructor() {

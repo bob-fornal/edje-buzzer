@@ -46,10 +46,10 @@ export class BuzzersComponent implements OnInit {
     
     this.active = !this.active;
     
-    if (this.active === false) {
-      const randomIndex = Math.floor(Math.random() * (this.audio.audioFiles.length));
-      this.audio.play(randomIndex);  
-    }
+    // if (this.active === false) {
+    //   const randomIndex = Math.floor(Math.random() * (this.audio.audioFiles.length));
+    //   this.audio.play(randomIndex);  
+    // }
   };
 
 }
