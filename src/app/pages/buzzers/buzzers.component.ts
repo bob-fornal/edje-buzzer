@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { AudioService } from '@core/services/audio-resolver.service';
+// import { AudioService } from '@core/services/audio-resolver.service';
 import { SocketService } from '@core/services/socket.service';
 
 import { BaseMessage } from '@core/interfaces/base-message';
@@ -25,7 +25,7 @@ export class BuzzersComponent implements OnInit {
   isSelectionActive: boolean = true;
 
   constructor(
-    private audio: AudioService,
+    // private audio: AudioService,
     private route: ActivatedRoute,
     private socket: SocketService
   ) {
