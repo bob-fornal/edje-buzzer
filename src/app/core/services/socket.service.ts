@@ -38,8 +38,8 @@ export class SocketService {
   public messagesOfType = (type: string): Observable<BaseMessage> => {
     return new Observable(observer => {
       this.websocket.onmessage = (eventString: MessageEvent) => {
-        console.log('onmessage', eventString.data);
-        const event: BaseMessage = eventString.data;
+        const event: BaseMessage = (JSON.parse(eventString.data)).data;
+        console.log('onmessage', event);
         if (type === '~~ANY~~' || event.type === type) {
           observer.next(event);
         }

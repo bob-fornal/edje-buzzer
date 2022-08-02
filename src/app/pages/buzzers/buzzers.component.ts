@@ -35,10 +35,21 @@ export class BuzzersComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.initListening();
+  }
 
   handleSelection = () => {
     this.isSelectionActive = false;
+  };
+
+  initListening = (): void => {
+    this.socket.messagesOfType('BUZZER-RESET').subscribe(this.handleBuzzerReset.bind(this));
+  };
+
+  handleBuzzerReset = (message: BaseMessage): void => {
+    console.log(message);
+    this.active = true;
   };
 
   clickGreenBuzzer = () => {
