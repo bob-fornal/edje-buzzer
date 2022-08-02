@@ -57,9 +57,9 @@ export class ManagementComponent implements OnInit {
     return _location.origin + origin;
   };
 
-  copyDisplay = (): void => {
+  openDisplay = (): void => {
     const url: string = `${ this.origin }/edje-display/${ this.key }`;
-    this.clipboard.copy(url);
+    window.open(url, '_blank');
   };
 
   copyBuzzer = (): void => {
@@ -69,7 +69,6 @@ export class ManagementComponent implements OnInit {
 
   openDiagnostics = (): void => {
     const url: string = `${ this.origin }/diagnostic/${ this.key }`;
-    console.log(url);
     window.open(url, '_blank');
   };
   

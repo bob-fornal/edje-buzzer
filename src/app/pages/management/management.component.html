@@ -18,31 +18,31 @@
     <mat-card class="card pale-green">
       <mat-card-title>Links</mat-card-title>
       <mat-card-content>
-        <div class="link" (click)="copyDisplay()">
+        <div class="link" (click)="openDisplay()">
           <span class="label">
-            Copy Link for
+            Go to ...
           </span>
           <span class="highlight">
             <span>Display</span>
             <mat-icon>content_copy</mat-icon>
           </span>
         </div>
-        <div class="link" (click)="copyBuzzer()">
-          <span class="label">
-            Copy Link for
-          </span>
-          <span class="highlight">
-            <span>Buzzers</span>
-            <mat-icon>content_copy</mat-icon>
-          </span>
-        </div>
         <div class="link" (click)="openDiagnostics()">
           <span class="label">
-            Go to
+            Go to ...
           </span>
           <span class="highlight">
             <span>Diagnostics</span>
             <mat-icon>open_in_new</mat-icon>
+          </span>
+        </div>
+        <div class="link" (click)="copyBuzzer()">
+          <span class="label">
+            Copy Link for ...
+          </span>
+          <span class="highlight">
+            <span>Buzzers</span>
+            <mat-icon>content_copy</mat-icon>
           </span>
         </div>
       </mat-card-content>
