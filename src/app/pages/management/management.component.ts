@@ -33,8 +33,7 @@ export class ManagementComponent implements OnInit {
     public socket: SocketService
   ) {
     this.init();
-    const origin: string = (location.pathname + '/#').replace(/\/\//, '/');
-    this.origin = location.origin + origin;
+    this.origin = this.getOrigin(location);
     // this.socket.setApiKey(this.key);
   }
 
@@ -51,6 +50,11 @@ export class ManagementComponent implements OnInit {
     const storedKey: any = this.storage.getKey();
     const assignKey: string = (storedKey === null) ? '' : storedKey;
     this.key = assignKey;
+  };
+
+  getOrigin = (_location: any): string => {
+    const origin: string = (_location.pathname + '/#').replace(/\/\//, '/');
+    return _location.origin + origin;
   };
 
   copyDisplay = (): void => {
