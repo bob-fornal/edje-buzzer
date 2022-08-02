@@ -33,7 +33,7 @@ export class ManagementComponent implements OnInit {
     public socket: SocketService
   ) {
     this.init();
-    const origin: string = (location.pathname + '/#/').replace(/\/\//, '/');
+    const origin: string = (location.pathname + '/#').replace(/\/\//, '/');
     this.origin = location.origin + origin;
     // this.socket.setApiKey(this.key);
   }
