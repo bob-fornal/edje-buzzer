@@ -16,7 +16,6 @@ import { Team } from '@core/interfaces/team';
 })
 export class ManagementComponent implements OnInit {
 
-  // HIDDEN KEY: kbfzwq1taOwqDyw7GjgDZDZCd6QByYU8uC2B6kGj
   origin: string = '';
   key: string = '';
 
@@ -61,6 +60,12 @@ export class ManagementComponent implements OnInit {
   copyBuzzer = (): void => {
     const url: string = `${ this.origin }/buzzers/${ this.key }`;
     this.clipboard.copy(url);
+  };
+
+  openDiagnostics = (): void => {
+    const url: string = `${ this.origin }/diagnostic/${ this.key }`;
+    console.log(url);
+    window.open(url, '_blank');
   };
   
   setCurrentKey(key: string): void {

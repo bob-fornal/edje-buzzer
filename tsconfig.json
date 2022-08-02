@@ -15,6 +15,7 @@
     },
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
+    "strictPropertyInitialization": false,
 
     "forceConsistentCasingInFileNames": true,
     "strict": true,

@@ -10,7 +10,7 @@ import { BaseMessage } from "@core/interfaces/base-message";
 export class SocketService {
 
   private websocket: any;
-  private PIE_CLUSTER_ID: string = 'us-nyc-2';
+  private PIE_CLUSTER_ID: string = 's4077.nyc3';
   private PIE_CHANNEL_ID: string = '1';
   private PIE_API_KEY: string = '';
 
@@ -22,7 +22,7 @@ export class SocketService {
     this.connectWebSocket();
   };
 
-  private getPieSocketUrl = (cluster: string, channel: string, apikey: string) => `wss://${ cluster }.piesocket.com/v3/${ channel }?api_key=${ apikey }`;
+  private getPieSocketUrl = (cluster: string, channel: string, apikey: string) => `wss://${ cluster }.piesocket.com/v3/${ channel }?api_key=${ apikey }&notify_self`;
   private useSocketAWS: boolean = true;
 
   private connectWebSocket = (): void => {
@@ -39,8 +39,8 @@ export class SocketService {
     return new Observable(observer => {
       this.websocket.onmessage = (eventString: MessageEvent) => {
         console.log('onmessage', eventString.data);
-        const event: BaseMessage = JSON.parse(eventString.data);
-        if (event.type === type) {
+        const event: BaseMessage = eventString.data;
+        if (type === '~~ANY~~' || event.type === type) {
           observer.next(event);
         }
       };

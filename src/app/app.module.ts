@@ -19,13 +19,15 @@ import { ManagementComponent } from './pages/management/management.component';
 import { DisplayComponent } from './pages/display/display.component';
 import { BuzzersComponent } from './pages/buzzers/buzzers.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DiagnosticComponent } from './pages/diagnostic/diagnostic.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ManagementComponent,
     DisplayComponent,
-    BuzzersComponent
+    BuzzersComponent,
+    DiagnosticComponent
   ],
   imports: [
     BrowserModule,
