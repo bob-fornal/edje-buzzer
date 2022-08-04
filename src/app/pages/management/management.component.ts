@@ -9,12 +9,16 @@ import { SocketService } from '@core/services/socket.service';
 
 import { Team } from '@core/interfaces/team';
 
+import config from '@core/constants/config.json';
+
 @Component({
   selector: 'app-management',
   templateUrl: './management.component.html',
   styleUrls: ['./management.component.scss']
 })
 export class ManagementComponent implements OnInit {
+
+  version: string = config.version;
 
   origin: string = '';
   key: string = '';
