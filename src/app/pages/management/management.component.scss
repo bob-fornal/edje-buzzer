@@ -9,7 +9,27 @@
   width: 100vw;
 }
 
+.display-info {
+  box-sizing: border-box;
+  font-size: 1rem;
+  position: relative;
+  
+  .block {
+    border: 1px solid black;
+    display: inline-block;
+    height: 1em;
+    width: 1em;
+
+    margin-right: 0.5em;
+  }
+  .label {
+    font-weight: bold;
+    position: absolute;
+  }
+}
+
 .link {
+
   .label {
     font-weight: bold;
   }

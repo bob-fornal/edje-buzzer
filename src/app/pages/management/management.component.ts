@@ -22,9 +22,9 @@ export class ManagementComponent implements OnInit {
   term$: Subject<string> = new Subject<string>();
 
   teams: Array<Team> = [
-    { id: '1', title: 'Team 1' },
-    { id: '2', title: 'Team 2' },
-    { id: '3', title: 'Team 3' }
+    { id: '1', title: 'Team 1', color: '#ff0000' },
+    { id: '2', title: 'Team 2', color: '#ffff00' },
+    { id: '3', title: 'Team 3', color: '#0000ff' }
   ];
 
   constructor(
@@ -34,7 +34,7 @@ export class ManagementComponent implements OnInit {
   ) {
     this.init();
     this.origin = this.getOrigin(location);
-    // this.socket.setApiKey(this.key);
+    this.socket.setApiKey(this.key);
   }
 
   ngOnInit(): void { }
@@ -58,7 +58,8 @@ export class ManagementComponent implements OnInit {
   };
 
   openDisplay = (): void => {
-    const url: string = `${ this.origin }/edje-display/${ this.key }`;
+    const colors: string = this.teams.map((team: Team): string => team.color.replace('#', '_')).join(',');
+    const url: string = `${ this.origin }/edje-display/${ this.key }/${ colors }`;
     window.open(url, '_blank');
   };
 
