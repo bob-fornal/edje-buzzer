@@ -17,9 +17,9 @@ export class BuzzersComponent implements OnInit {
   active: boolean = true;
 
   teams: Array<Team> = [
-    { id: '0', title: 'Team 1', value: 'team1' },
-    { id: '1', title: 'Team 2', value: 'team2' },
-    { id: '2', title: 'Team 3', value: 'team3' }
+    { id: '0', title: 'Team 1', value: 'team1', color: '#ff0000' },
+    { id: '1', title: 'Team 2', value: 'team2', color: '#ffff00' },
+    { id: '2', title: 'Team 3', value: 'team3', color: '#0000ff' }
   ];
 
   isSelectionActive: boolean = true;

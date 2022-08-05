@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/edje-management', pathMatch: 'full' },
 
   { path: 'edje-management', component: ManagementComponent },
-  { path: 'edje-display/:key', component: DisplayComponent },
+  { path: 'edje-display/:key/:colors', component: DisplayComponent },
   { path: 'buzzers/:key', component: BuzzersComponent },
 
   { path: 'diagnostic/:key', component: DiagnosticComponent }
