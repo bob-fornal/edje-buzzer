@@ -6,6 +6,7 @@ import { SocketService } from '@core/services/socket.service';
 
 import { BaseMessage } from '@core/interfaces/base-message';
 import { Team } from '@core/interfaces/team';
+import { ToolsService } from '@core/services/tools.service';
 
 @Component({
   selector: 'app-buzzers',
@@ -15,6 +16,7 @@ import { Team } from '@core/interfaces/team';
 export class BuzzersComponent implements OnInit {
 
   active: boolean = true;
+  uuid: string = 'xxxx-xxxx-xxxx-xxxx';
 
   teams: Array<Team> = [
     { id: '0', title: 'Team 1', value: 'team1', color: '#ff0000' },
@@ -26,13 +28,15 @@ export class BuzzersComponent implements OnInit {
 
   constructor(
     // private audio: AudioService,
-    private route: ActivatedRoute,
-    private socket: SocketService
+    public route: ActivatedRoute,
+    public socket: SocketService,
+    public tools: ToolsService
   ) {
     this.route.params.subscribe(params => {
       const key: string = params['key'];
       this.socket.setApiKey(key);
     });
+    this.uuid = this.tools.generateUUID();
   }
 
   ngOnInit(): void {
@@ -59,6 +63,7 @@ export class BuzzersComponent implements OnInit {
     const message: BaseMessage = {
       type: 'CLICKED-BUZZER',
       payload: {
+        uuid: this.uuid,
         username: 'BOB',
         time: (new Date()).toUTCString()
       }
