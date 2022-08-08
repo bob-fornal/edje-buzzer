@@ -4,6 +4,13 @@
   <div class="left-wrapper width-30">
     
     <mat-card class="card pale-yellow">
+      <mat-card-title>Version</mat-card-title>
+      <mat-card-content>
+        {{ version }}
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="card pale-yellow">
       <mat-card-title>Teams</mat-card-title>
       <mat-card-content>
         <div class="display-info" *ngFor="let team of teams">
