@@ -7,7 +7,7 @@
 
         <mat-form-field class="team-row team-selector" appearance="fill">
           <mat-label>Team</mat-label>
-          <mat-select>
+          <mat-select [(ngModel)]="selectedTeam" [ngModelOptions]="{ standalone: true }" (selectionChange)="setTeam($event.value)">
             <mat-option *ngFor="let team of teams" [value]="team.value">
               {{ team.title }}
             </mat-option>
@@ -16,7 +16,7 @@
 
         <mat-form-field class="team-row username" appearance="fill">
           <mat-label>Username</mat-label>
-          <input matInput placeholder="Ex. Bob" />
+          <input matInput placeholder="Ex. Bob" [(ngModel)]="selectedUsername" [ngModelOptions]="{ standalone: true }" />
         </mat-form-field>
 
         <button
@@ -29,8 +29,8 @@
     </div>
 
     <div class="buzzer" (click)="clickGreenBuzzer()">
-      <img class="image" [class.active]="active === true" src="assets/images/buzzer-green.png" />
-      <img class="image" [class.active]="active === false" src="assets/images/buzzer-red.png" />
+      <img class="image" [class.active]="active === true" src="assets/images/buzzer-green.png" alt="green buzzer" />
+      <img class="image" [class.active]="active === false" src="assets/images/buzzer-red.png" alt="red buzzer" />
     </div>
     
   </div>
