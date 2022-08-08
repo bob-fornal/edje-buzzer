@@ -1,10 +1,16 @@
 # Edje-Buzzer
 
-## Project
+## Project Goal
 
 This project is designed to accomodate three teams that can "buzz in" and attempt to answer a question.
 
 The project uses Angular for the frontend and websockets for communication.
+
+## Future Thoughts and Ideas
+
+* Color Selection for Teams.
+* Multiple Teams (Ability to Add/Remove).
+* Team Balancing (track number selected and close "filled" teams).
 
 ## Development Expectations.
 

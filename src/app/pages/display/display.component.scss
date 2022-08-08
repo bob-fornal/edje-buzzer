@@ -1,0 +1,66 @@
+
+.wrapper {
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+.display-info {
+  box-sizing: border-box;
+  font-size: 1rem;
+  position: relative;
+  
+  .block {
+    border: 1px solid black;
+    display: inline-block;
+    height: 1em;
+    width: 1em;
+
+    margin-right: 0.5em;
+  }
+  .label {
+    font-weight: bold;
+    position: absolute;
+  }
+}
+
+.left-wrapper {
+  position: absolute;
+  top: 1em;
+  left: 1em;
+
+  &.width-70 {
+    display: inline-block;
+    height: calc(100vh - 2em);
+    width: 70vw;
+  }
+}
+.right-wrapper {
+  position: absolute;
+  top: 1em;
+  left: calc(70vw + 2em);
+
+  &.width-30 {
+    display: inline-block;
+    margin-left: 1em;
+    height: calc(100vh - 2em);
+    width: calc(30vw - 4em);
+  }
+}
+
+.card {
+  margin-bottom: 1em;
+
+  &.pale-green {
+    background-color: palegreen;
+    color: #444;
+  }
+  &.pale-yellow {
+    background-color: palegoldenrod;
+    color: #444;
+  }
+}
