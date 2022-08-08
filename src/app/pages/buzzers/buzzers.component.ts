@@ -26,6 +26,9 @@ export class BuzzersComponent implements OnInit {
 
   isSelectionActive: boolean = true;
 
+  selectedTeam: string = 'team1';
+  selectedUsername: string = '';
+
   constructor(
     // private audio: AudioService,
     public route: ActivatedRoute,
@@ -42,6 +45,10 @@ export class BuzzersComponent implements OnInit {
   ngOnInit(): void {
     this.initListening();
   }
+
+  setTeam = (team: string): void => {
+    this.selectedTeam = team;
+  };
 
   handleSelection = () => {
     this.isSelectionActive = false;
