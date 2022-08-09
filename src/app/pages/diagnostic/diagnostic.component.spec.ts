@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { DiagnosticComponent } from './diagnostic.component';
 
-import { activatedRouteSpy } from '@shared/_spec/route-spy.spec'
+import { activatedRouteSpy } from '@shared/_spec-tools/route-spy.spec'
 
 describe('DiagnosticComponent', () => {
   let component: DiagnosticComponent;

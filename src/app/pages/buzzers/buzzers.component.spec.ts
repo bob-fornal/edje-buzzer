@@ -11,7 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 
-import { activatedRouteSpy } from '@shared/_spec/route-spy.spec'
+import { activatedRouteSpy } from '@shared/_spec-tools/route-spy.spec'
 
 describe('BuzzersComponent', () => {
   let component: BuzzersComponent;

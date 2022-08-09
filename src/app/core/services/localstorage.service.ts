@@ -13,14 +13,14 @@ export class LocalstorageService {
   get = (key: string): any => this.localstorage.getItem(key);
   set = (key: string, value: string): any => this.localstorage.setItem(key, value);
 
-  setWebsocketKey = (key: string): void => {
-    const readKey: string = config.key;
-    this.localstorage.setItem(readKey, key);
-  };
-
   getWebsocketKey = (): string | null => {
     const readKey: string = config.key;
     return this.localstorage.getItem(readKey);
+  };
+
+  setWebsocketKey = (key: string): void => {
+    const readKey: string = config.key;
+    this.localstorage.setItem(readKey, key);
   };
 
 }

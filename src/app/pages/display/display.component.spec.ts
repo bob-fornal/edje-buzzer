@@ -6,7 +6,7 @@ import { DisplayComponent } from './display.component';
 
 import { MatCardModule } from '@angular/material/card';
 
-import { activatedRouteSpy } from '@shared/_spec/route-spy.spec'
+import { activatedRouteSpy } from '@shared/_spec-tools/route-spy.spec'
 
 describe('DisplayComponent', () => {
   let component: DisplayComponent;
