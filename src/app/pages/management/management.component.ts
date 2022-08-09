@@ -101,7 +101,7 @@ export class ManagementComponent implements OnInit {
     this.teams.forEach((team: any, index: number): void => {
       team.count = 0;
       teamLocations[team.value] = index;
-    })
+    });
     this.uuids.forEach((uuid: string): void => {
       const uuidTeam: string = this.users[uuid].team;
       this.teams[teamLocations[uuidTeam]].count!++;
