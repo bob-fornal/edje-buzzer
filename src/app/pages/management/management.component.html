@@ -16,6 +16,7 @@
         <div class="display-info" *ngFor="let team of teams">
           <span class="block" [style.background-color]="team.color"></span>
           <span class="label">{{ team.title }}</span>
+          <span class="label left-pad">({{ team.count }})</span>
         </div>
       </mat-card-content>
       <mat-card-actions>

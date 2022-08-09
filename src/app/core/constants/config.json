@@ -1,4 +1,6 @@
 {
-  "version": "0.1.0",
-  "key": "pie-socket-key"
+  "version": "0.1.1",
+
+  "key": "pie-socket-key",
+  "uuid": "uuid"
 }

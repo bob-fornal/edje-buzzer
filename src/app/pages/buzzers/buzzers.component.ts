@@ -52,6 +52,15 @@ export class BuzzersComponent implements OnInit {
 
   handleSelection = () => {
     this.isSelectionActive = false;
+    const message: BaseMessage = {
+      type: 'SELECTED-TEAM',
+      payload: {
+        uuid: this.uuid,
+        username: this.selectedUsername,
+        team: this.selectedTeam
+      }
+    };
+    this.socket.publish(message);
   };
 
   initListening = (): void => {

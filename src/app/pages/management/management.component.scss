@@ -24,7 +24,10 @@
   }
   .label {
     font-weight: bold;
-    position: absolute;
+
+    &.left-pad {
+      margin-left: 0.5em;
+    }
   }
 }
 

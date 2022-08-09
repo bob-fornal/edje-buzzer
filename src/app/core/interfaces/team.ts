@@ -4,4 +4,5 @@ export interface Team {
   title: string;
   color: string;
   value?: string;
+  count?: number;
 }
