@@ -20,8 +20,8 @@ export class DisplayComponent implements OnInit {
   ];
 
   constructor(
-    private route: ActivatedRoute,
-    private socket: SocketService
+    public route: ActivatedRoute,
+    public socket: SocketService
   ) { }
 
   ngOnInit(): void {

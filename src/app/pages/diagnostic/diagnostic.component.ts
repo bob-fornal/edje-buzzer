@@ -32,6 +32,8 @@ export class DiagnosticComponent implements OnInit {
   ngOnInit(): void {
     this.initApiKey();
     this.setTimeout(this.initProcesses, 1000);
+
+    this.socket.messagesOfType('~~ANY~~').subscribe(this.handleMessage.bind(this));
   }
 
   initApiKey = (): void => {
@@ -41,11 +43,6 @@ export class DiagnosticComponent implements OnInit {
 
   initProcesses = () => {
     this.jsonInput.nativeElement.value = JSON.stringify(this.defaultBaseObject);
-    this.initListening();
-  };
-
-  initListening = (): void => {
-    this.socket.messagesOfType('~~ANY~~').subscribe(this.handleMessage.bind(this));
   };
 
   sendMessage = (content: string): void => {
