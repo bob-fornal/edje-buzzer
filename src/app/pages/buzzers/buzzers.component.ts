@@ -35,16 +35,22 @@ export class BuzzersComponent implements OnInit {
     public socket: SocketService,
     public tools: ToolsService
   ) {
-    this.route.params.subscribe(params => {
-      const key: string = params['key'];
-      this.socket.setApiKey(key);
-    });
-    this.uuid = this.tools.generateUUID();
   }
 
   ngOnInit(): void {
+    this.uuid = this.tools.generateUUID();
+    this.initApiKey();
     this.initListening();
   }
+
+  initApiKey = (): void => {
+    const key: any = this.route.snapshot.paramMap.get('key');
+    this.socket.setApiKey(key);
+  };
+
+  initListening = (): void => {
+    this.socket.messagesOfType('BUZZER-RESET').subscribe(this.handleBuzzerReset.bind(this));
+  };
 
   setTeam = (team: string): void => {
     this.selectedTeam = team;
@@ -61,10 +67,6 @@ export class BuzzersComponent implements OnInit {
       }
     };
     this.socket.publish(message);
-  };
-
-  initListening = (): void => {
-    this.socket.messagesOfType('BUZZER-RESET').subscribe(this.handleBuzzerReset.bind(this));
   };
 
   handleBuzzerReset = (message: BaseMessage): void => {

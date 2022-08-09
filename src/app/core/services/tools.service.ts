@@ -19,7 +19,7 @@ export class ToolsService {
     const oldUUID: any = this.storage.get(uuidKey);
     if (oldUUID !== null) return oldUUID;
 
-    const newUUID: string = 'xxxx-xxxx-xxx-xxxx'.replace(/[x]/g, () => {  
+    const newUUID: string = 'xxxx-xxxx-xxxx-xxxx'.replace(/[x]/g, () => {  
       const r = Math.floor(Math.random() * 16);  
       return r.toString(16);  
     });
