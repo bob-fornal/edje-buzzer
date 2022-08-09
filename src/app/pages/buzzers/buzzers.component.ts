@@ -85,6 +85,22 @@ export class BuzzersComponent implements OnInit {
       }
     };
     this.socket.publish(message);
+
+    this.checkAudio();
+  };
+
+  checkAudio = (): void => {
+    const username: string = this.selectedUsername.toLocaleLowerCase();
+    const isDave: boolean = username.includes('dave') || username.includes('david');
+    if (isDave === false) return;
+
+    const files: Array<any> = [
+      document.getElementById('audio-dave-01'),
+      document.getElementById('audio-dave-02'),
+      document.getElementById('audio-dave-03')
+    ];
+    const randomIndex: number = Math.floor(Math.random() * files.length);
+    files[randomIndex].play();
   };
 
 }
