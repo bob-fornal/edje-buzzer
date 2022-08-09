@@ -35,7 +35,7 @@
             <div class="td">Open</div>
           </div>
 
-          <div class="tr" *ngFor="let page of pages">
+          <div class="tr row" *ngFor="let page of pages">
             <div class="td">{{ page.title }}</div>
             <div class="td">
               <div class="clickable" (click)="copy(page.type)">
@@ -58,10 +58,16 @@
   </div>
 
   <div class="right-wrapper width-70">
-    <mat-form-field class="key-input" appearance="fill" color="primary">
-      <mat-label>PieSocket Key</mat-label>
-      <input matInput placeholder="enter key" [(ngModel)]="key" (ngModelChange)="term$.next($event)" />
-    </mat-form-field>
+    <mat-card class="card pale-green">
+      <mat-card-title>Piesocket Key</mat-card-title>
+      <mat-card-content>
+
+        <mat-form-field class="key-input" appearance="fill" color="primary">
+          <mat-label>PieSocket Key</mat-label>
+          <input matInput placeholder="enter key" [(ngModel)]="key" (ngModelChange)="term$.next($event)" />
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
   </div>
 
 </div>

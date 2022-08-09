@@ -1,5 +1,6 @@
 
 .wrapper {
+  background-color: #444;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
   position: fixed;
@@ -27,6 +28,24 @@
 
     &.left-pad {
       margin-left: 0.5em;
+    }
+  }
+}
+
+.table {
+
+  .th {
+    background-color: #444;
+    color: white;
+  }
+
+  .tr.row {
+
+    &:nth-child(even) {
+      background-color: silver;
+    }
+    &:nth-child(odd) {
+      background-color: white;
     }
   }
 }
