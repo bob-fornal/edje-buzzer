@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-// import { AudioService } from '@core/services/audio-resolver.service';
 import { SocketService } from '@core/services/socket.service';
 
 import { BaseMessage } from '@core/interfaces/base-message';
@@ -30,12 +29,10 @@ export class BuzzersComponent implements OnInit {
   selectedUsername: string = '';
 
   constructor(
-    // private audio: AudioService,
     public route: ActivatedRoute,
     public socket: SocketService,
     public tools: ToolsService
-  ) {
-  }
+  ) { }
 
   ngOnInit(): void {
     this.uuid = this.tools.generateUUID();
@@ -69,7 +66,7 @@ export class BuzzersComponent implements OnInit {
     this.socket.publish(message);
   };
 
-  handleBuzzerReset = (message: BaseMessage): void => {
+  handleBuzzerReset = (): void => {
     this.active = true;
   };
 
@@ -87,18 +84,18 @@ export class BuzzersComponent implements OnInit {
     };
     this.socket.publish(message);
 
-    this.checkAudio();
+    this.checkAudio(document);
   };
 
-  checkAudio = (): void => {
+  checkAudio = (_document: any): void => {
     const username: string = this.selectedUsername.toLocaleLowerCase();
     const isDave: boolean = username.includes('dave') || username.includes('david');
     if (isDave === false) return;
 
     const files: Array<any> = [
-      document.getElementById('audio-dave-01'),
-      document.getElementById('audio-dave-02'),
-      document.getElementById('audio-dave-03')
+      _document.getElementById('audio-dave-01'),
+      _document.getElementById('audio-dave-02'),
+      _document.getElementById('audio-dave-03')
     ];
     const randomIndex: number = Math.floor(Math.random() * files.length);
     files[randomIndex].play();
