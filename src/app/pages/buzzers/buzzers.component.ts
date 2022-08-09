@@ -70,7 +70,6 @@ export class BuzzersComponent implements OnInit {
   };
 
   handleBuzzerReset = (message: BaseMessage): void => {
-    console.log(message);
     this.active = true;
   };
 

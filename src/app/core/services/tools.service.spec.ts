@@ -17,7 +17,6 @@ describe('ToolsService', () => {
   it('expects "generateUUID" to generate a uniue string', () => {
     const result: string = service.generateUUID();
     expect(result).not.toEqual('xxxx-xxxx-xxxx-xxxx');
-    console.log('=====>', `:${ result }:`);
     expect(result.length).toEqual(19);
   });
 });

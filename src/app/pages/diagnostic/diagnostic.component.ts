@@ -49,13 +49,11 @@ export class DiagnosticComponent implements OnInit {
   };
 
   sendMessage = (content: string): void => {
-    console.log(content);
     const message: BaseMessage = JSON.parse(content);
     this.socket.publish(message);
   };
 
   handleMessage = (message: BaseMessage): void => {
-    console.log(message);
     this.responses.push(JSON.stringify(message));
   };
 
