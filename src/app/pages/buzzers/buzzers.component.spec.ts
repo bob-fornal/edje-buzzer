@@ -1,6 +1,10 @@
+
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
 
 import { BuzzersComponent } from './buzzers.component';
+
+import { activatedRouteSpy } from '@shared/_spec/route-spy.spec'
 
 describe('BuzzersComponent', () => {
   let component: BuzzersComponent;
@@ -8,7 +12,12 @@ describe('BuzzersComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BuzzersComponent ]
+      declarations: [
+        BuzzersComponent
+      ],
+      providers: [
+        { provide: ActivatedRoute, useValue: activatedRouteSpy }
+      ]
     })
     .compileComponents();
   });

@@ -34,6 +34,12 @@ export class ManagementComponent implements OnInit {
   uuids: Array<string> = [];
   users: any = {};
 
+  pages: Array<any> = [
+    { title: 'Display', type: 'DISPLAY' },
+    { title: 'Buzzers', type: 'BUZZERS' },
+    { title: 'Diagnostics', type: 'DIAGNOSTICS' }
+  ];
+
   constructor(
     public clipboard: Clipboard,
     public storage: LocalstorageService,
@@ -66,22 +72,33 @@ export class ManagementComponent implements OnInit {
     return _location.origin + origin;
   };
 
-  openDisplay = (): void => {
-    const colors: string = this.teams.map((team: Team): string => team.color.replace('#', '_')).join(',');
-    const url: string = `${ this.origin }/edje-display/${ this.key }/${ colors }`;
-    window.open(url, '_blank');
+  getURL = (type: string): string => {
+    let url: string = '';
+    switch (true) {
+      case (type === 'DISPLAY'):
+        const colors: string = this.teams.map((team: Team): string => team.color.replace('#', '_')).join(',');
+        url = `${ this.origin }/edje-display/${ this.key }/${ colors }`;
+        break;
+      case (type === 'BUZZERS'):
+        url = `${ this.origin }/buzzers/${ this.key }`;
+        break;
+      case (type === 'DIAGNOSTICS'):
+        url = `${ this.origin }/diagnostic/${ this.key }`;
+        break;
+    }
+    return url;
   };
 
-  copyBuzzer = (): void => {
-    const url: string = `${ this.origin }/buzzers/${ this.key }`;
+  copy = (type: string): void => {
+    const url: string = this.getURL(type);
     this.clipboard.copy(url);
   };
 
-  openDiagnostics = (): void => {
-    const url: string = `${ this.origin }/diagnostic/${ this.key }`;
+  open = (type: string): void => {
+    const url: string = this.getURL(type);
     window.open(url, '_blank');
   };
-  
+
   setCurrentKey(key: string): void {
     if (key.length === 0) return;
 

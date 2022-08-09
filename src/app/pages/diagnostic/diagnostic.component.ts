@@ -15,7 +15,6 @@ export class DiagnosticComponent implements OnInit {
   @ViewChild('jsonInput') jsonInput: ElementRef;
 
   key: string = '';
-
   responses: Array<string> = [];
 
   defaultBaseObject: BaseMessage = {
@@ -23,25 +22,27 @@ export class DiagnosticComponent implements OnInit {
     payload: {}
   };
 
+  setTimeout: any = setTimeout;
+
   constructor(
     public route: ActivatedRoute,
     public socket: SocketService
-  ) {
-    this.route.params.subscribe(params => {
-      const key: string = params['key'];
-      console.log(key);
-      this.socket.setApiKey(key);
-    });
-
-  }
+  ) { }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      console.log(this.jsonInput.nativeElement.value);
-      this.jsonInput.nativeElement.value = JSON.stringify(this.defaultBaseObject);
-      this.initListening();
-    }, 1000);
+    this.initApiKey();
+    this.setTimeout(this.initProcesses, 1000);
   }
+
+  initApiKey = (): void => {
+    const key: any = this.route.snapshot.paramMap.get('key');
+    this.socket.setApiKey(key);
+  };
+
+  initProcesses = () => {
+    this.jsonInput.nativeElement.value = JSON.stringify(this.defaultBaseObject);
+    this.initListening();
+  };
 
   initListening = (): void => {
     this.socket.messagesOfType('~~ANY~~').subscribe(this.handleMessage.bind(this));
