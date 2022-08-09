@@ -40,36 +40,47 @@ export class ManagementComponent implements OnInit {
     { title: 'Diagnostics', type: 'DIAGNOSTICS' }
   ];
 
+  window: any = window;
+
   constructor(
     public clipboard: Clipboard,
     public storage: LocalstorageService,
     public socket: SocketService
   ) {
     this.init();
-    this.origin = this.getOrigin(location);
-    this.socket.setApiKey(this.key);
-
     this.socket.messagesOfType('SELECTED-TEAM').subscribe(this.selectedTeam);
   }
 
   ngOnInit(): void { }
 
   init = (): void => {
+    this.initCaptureKey();
+    this.initCheckForKey();
+    this.initOrigin(location);
+  };
+
+  initCaptureKey = (): void => {
     this.term$.pipe(
       debounceTime(1000),
       distinctUntilChanged()
-    ).subscribe((value: string): void => {
-      this.setCurrentKey(value);
-    });
+    ).subscribe(this.handleCapture);
+  };
 
+  initCheckForKey = (): void => {
     const storedKey: any = this.storage.getWebsocketKey();
     const assignKey: string = (storedKey === null) ? '' : storedKey;
     this.key = assignKey;
+    if (assignKey.length > 0) {
+      this.socket.setApiKey(this.key);
+    }
   };
 
-  getOrigin = (_location: any): string => {
-    const origin: string = (_location.pathname + '/#').replace(/\/\//, '/');
-    return _location.origin + origin;
+  initOrigin = (_location: any): void => {
+    this.origin = _location.origin + (_location.pathname + '/#').replace(/\/\//g, '/');
+  };
+
+  handleCapture = (data: string): void => {
+    this.setCurrentKey(data);
   };
 
   getURL = (type: string): string => {
@@ -96,12 +107,11 @@ export class ManagementComponent implements OnInit {
 
   open = (type: string): void => {
     const url: string = this.getURL(type);
-    window.open(url, '_blank');
+    this.window.open(url, '_blank');
   };
 
   setCurrentKey(key: string): void {
     if (key.length === 0) return;
-
     this.storage.setWebsocketKey(key);
   }
 
