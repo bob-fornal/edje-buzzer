@@ -32,6 +32,7 @@ module.exports = function (config) {
       subdir: '.',
       reporters: [
         { type: 'html' },
+        { type: 'lcovonly' }
       ]
     },
     reporters: ['progress', 'kjhtml'],
