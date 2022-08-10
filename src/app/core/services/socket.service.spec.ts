@@ -65,11 +65,11 @@ describe('SocketService', () => {
     service.messagesOfType('~~ANY~~').subscribe((data: any) => {
       result = data;
     });
-    const item: any = { data: { type: '~~ANY~~', payload: 'PAYLOAD' } };
+    const item: any = { type: '~~ANY~~', payload: 'PAYLOAD' };
     const message: any = { data: JSON.stringify(item) };
 
     service.websocket.onmessage(message);
-    expect(result).toEqual(item.data);
+    expect(result).toEqual(item);
   });
 
   it('expects "messageOfType" to allow subscription and handle a specific message type', () => {
@@ -78,11 +78,11 @@ describe('SocketService', () => {
     service.messagesOfType('SPECIFIC').subscribe((data: any) => {
       result = data;
     });
-    const item: any = { data: { type: 'SPECIFIC', payload: 'PAYLOAD' } };
+    const item: any = { type: 'SPECIFIC', payload: 'PAYLOAD' };
     const message: any = { data: JSON.stringify(item) };
 
     service.websocket.onmessage(message);
-    expect(result).toEqual(item.data);
+    expect(result).toEqual(item);
   });
 
   it('expects "messageOfType" to allow subscription and handle a different message type', () => {
@@ -91,7 +91,7 @@ describe('SocketService', () => {
     service.messagesOfType('DIFFERENT').subscribe((data: any) => {
       result = data;
     });
-    const item: any = { data: { type: 'SPECIFIC', payload: 'PAYLOAD' } };
+    const item: any = { type: 'SPECIFIC', payload: 'PAYLOAD' };
     const message: any = { data: JSON.stringify(item) };
 
     service.websocket.onmessage(message);
