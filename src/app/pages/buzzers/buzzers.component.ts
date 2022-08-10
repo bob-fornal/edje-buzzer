@@ -80,7 +80,7 @@ export class BuzzersComponent implements OnInit {
       type: 'CLICKED-BUZZER',
       payload: {
         uuid: this.uuid,
-        username: 'BOB',
+        username: this.selectedUsername,
         time: (new Date()).toUTCString()
       }
     };
