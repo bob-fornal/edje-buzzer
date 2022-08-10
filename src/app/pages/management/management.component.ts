@@ -9,6 +9,7 @@ import { SocketService } from '@core/services/socket.service';
 
 import { Team } from '@core/interfaces/team';
 
+import actions from '@core/constants/actions.json';
 import config from '@core/constants/config.json';
 
 @Component({
@@ -48,7 +49,7 @@ export class ManagementComponent implements OnInit {
     public socket: SocketService
   ) {
     this.init();
-    this.socket.messagesOfType('SELECTED-TEAM').subscribe(this.selectedTeam);
+    this.socket.messagesOfType(actions.SELECTED_TEAM).subscribe(this.selectedTeam);
   }
 
   ngOnInit(): void { }

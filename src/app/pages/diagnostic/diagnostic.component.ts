@@ -5,6 +5,8 @@ import { SocketService } from '@core/services/socket.service';
 
 import { BaseMessage } from '@core/interfaces/base-message';
 
+import actions from '@core/constants/actions.json';
+
 @Component({
   selector: 'app-diagnostic',
   templateUrl: './diagnostic.component.html',
@@ -33,7 +35,7 @@ export class DiagnosticComponent implements OnInit {
     this.initApiKey();
     this.setTimeout(this.initProcesses, 1000);
 
-    this.socket.messagesOfType('~~ANY~~').subscribe(this.handleMessage.bind(this));
+    this.socket.messagesOfType(actions.ANY_MESSAGE).subscribe(this.handleMessage.bind(this));
   }
 
   initApiKey = (): void => {

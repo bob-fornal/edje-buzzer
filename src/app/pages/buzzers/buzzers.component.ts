@@ -7,6 +7,8 @@ import { BaseMessage } from '@core/interfaces/base-message';
 import { Team } from '@core/interfaces/team';
 import { ToolsService } from '@core/services/tools.service';
 
+import actions from '@core/constants/actions.json';
+
 @Component({
   selector: 'app-buzzers',
   templateUrl: './buzzers.component.html',
@@ -46,7 +48,7 @@ export class BuzzersComponent implements OnInit {
   };
 
   initListening = (): void => {
-    this.socket.messagesOfType('BUZZER-RESET').subscribe(this.handleBuzzerReset.bind(this));
+    this.socket.messagesOfType(actions.BUZZER_RESET).subscribe(this.handleBuzzerReset.bind(this));
   };
 
   setTeam = (team: string): void => {
@@ -56,7 +58,7 @@ export class BuzzersComponent implements OnInit {
   handleSelection = () => {
     this.isSelectionActive = false;
     const message: BaseMessage = {
-      type: 'SELECTED-TEAM',
+      type: actions.SELECTED_TEAM,
       payload: {
         uuid: this.uuid,
         username: this.selectedUsername,
@@ -75,7 +77,7 @@ export class BuzzersComponent implements OnInit {
     
     this.active = !this.active;
     const message: BaseMessage = {
-      type: 'CLICKED-BUZZER',
+      type: actions.CLICKED_BUZZER,
       payload: {
         uuid: this.uuid,
         username: 'BOB',
