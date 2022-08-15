@@ -5,6 +5,8 @@ import { SocketService } from '@core/services/socket.service';
 
 import { BaseMessage } from '@core/interfaces/base-message';
 
+import actions from '@core/constants/actions.json';
+
 @Component({
   selector: 'app-diagnostic',
   templateUrl: './diagnostic.component.html',
@@ -15,7 +17,6 @@ export class DiagnosticComponent implements OnInit {
   @ViewChild('jsonInput') jsonInput: ElementRef;
 
   key: string = '';
-
   responses: Array<string> = [];
 
   defaultBaseObject: BaseMessage = {
@@ -23,38 +24,35 @@ export class DiagnosticComponent implements OnInit {
     payload: {}
   };
 
+  setTimeout: any = setTimeout;
+
   constructor(
     public route: ActivatedRoute,
     public socket: SocketService
-  ) {
-    this.route.params.subscribe(params => {
-      const key: string = params['key'];
-      console.log(key);
-      this.socket.setApiKey(key);
-    });
-
-  }
+  ) { }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      console.log(this.jsonInput.nativeElement.value);
-      this.jsonInput.nativeElement.value = JSON.stringify(this.defaultBaseObject);
-      this.initListening();
-    }, 1000);
+    this.initApiKey();
+    this.setTimeout(this.initProcesses, 1000);
+
+    this.socket.messagesOfType(actions.ANY_MESSAGE).subscribe(this.handleMessage.bind(this));
   }
 
-  initListening = (): void => {
-    this.socket.messagesOfType('~~ANY~~').subscribe(this.handleMessage.bind(this));
+  initApiKey = (): void => {
+    const key: any = this.route.snapshot.paramMap.get('key');
+    this.socket.setApiKey(key);
+  };
+
+  initProcesses = () => {
+    this.jsonInput.nativeElement.value = JSON.stringify(this.defaultBaseObject);
   };
 
   sendMessage = (content: string): void => {
-    console.log(content);
     const message: BaseMessage = JSON.parse(content);
     this.socket.publish(message);
   };
 
   handleMessage = (message: BaseMessage): void => {
-    console.log(message);
     this.responses.push(JSON.stringify(message));
   };
 

@@ -9,6 +9,7 @@ import { SocketService } from '@core/services/socket.service';
 
 import { Team } from '@core/interfaces/team';
 
+import actions from '@core/constants/actions.json';
 import config from '@core/constants/config.json';
 
 @Component({
@@ -34,57 +35,84 @@ export class ManagementComponent implements OnInit {
   uuids: Array<string> = [];
   users: any = {};
 
+  pages: Array<any> = [
+    { title: 'Display', type: 'DISPLAY' },
+    { title: 'Buzzers', type: 'BUZZERS' },
+    { title: 'Diagnostics', type: 'DIAGNOSTICS' }
+  ];
+
+  window: any = window;
+
   constructor(
     public clipboard: Clipboard,
     public storage: LocalstorageService,
     public socket: SocketService
   ) {
     this.init();
-    this.origin = this.getOrigin(location);
-    this.socket.setApiKey(this.key);
-
-    this.socket.messagesOfType('SELECTED-TEAM').subscribe(this.selectedTeam);
+    this.socket.messagesOfType(actions.SELECTED_TEAM).subscribe(this.selectedTeam);
   }
 
   ngOnInit(): void { }
 
   init = (): void => {
+    this.initCaptureKey();
+    this.initCheckForKey();
+    this.initOrigin(location);
+  };
+
+  initCaptureKey = (): void => {
     this.term$.pipe(
       debounceTime(1000),
       distinctUntilChanged()
-    ).subscribe((value: string): void => {
-      this.setCurrentKey(value);
-    });
+    ).subscribe(this.handleCapture);
+  };
 
+  initCheckForKey = (): void => {
     const storedKey: any = this.storage.getWebsocketKey();
     const assignKey: string = (storedKey === null) ? '' : storedKey;
     this.key = assignKey;
+    if (assignKey.length > 0) {
+      this.socket.setApiKey(this.key);
+    }
   };
 
-  getOrigin = (_location: any): string => {
-    const origin: string = (_location.pathname + '/#').replace(/\/\//, '/');
-    return _location.origin + origin;
+  initOrigin = (_location: any): void => {
+    this.origin = _location.origin + (_location.pathname + '/#').replace(/\/\//g, '/');
   };
 
-  openDisplay = (): void => {
-    const colors: string = this.teams.map((team: Team): string => team.color.replace('#', '_')).join(',');
-    const url: string = `${ this.origin }/edje-display/${ this.key }/${ colors }`;
-    window.open(url, '_blank');
+  handleCapture = (data: string): void => {
+    this.setCurrentKey(data);
   };
 
-  copyBuzzer = (): void => {
-    const url: string = `${ this.origin }/buzzers/${ this.key }`;
+  getURL = (type: string): string => {
+    let url: string = '';
+    switch (true) {
+      case (type === 'DISPLAY'):
+        const colors: string = this.teams.map((team: Team): string => team.color.replace('#', '_')).join(',');
+        url = `${ this.origin }/edje-display/${ this.key }/${ colors }`;
+        break;
+      case (type === 'BUZZERS'):
+        url = `${ this.origin }/buzzers/${ this.key }`;
+        break;
+      case (type === 'DIAGNOSTICS'):
+        url = `${ this.origin }/diagnostic/${ this.key }`;
+        break;
+    }
+    return url;
+  };
+
+  copy = (type: string): void => {
+    const url: string = this.getURL(type);
     this.clipboard.copy(url);
   };
 
-  openDiagnostics = (): void => {
-    const url: string = `${ this.origin }/diagnostic/${ this.key }`;
-    window.open(url, '_blank');
+  open = (type: string): void => {
+    const url: string = this.getURL(type);
+    this.window.open(url, '_blank');
   };
-  
+
   setCurrentKey(key: string): void {
     if (key.length === 0) return;
-
     this.storage.setWebsocketKey(key);
   }
 

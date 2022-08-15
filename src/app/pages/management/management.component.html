@@ -27,43 +27,47 @@
     <mat-card class="card pale-green">
       <mat-card-title>Links</mat-card-title>
       <mat-card-content>
-        <div class="link" (click)="openDisplay()">
-          <span class="label">
-            Go to ...
-          </span>
-          <span class="highlight">
-            <span>Display</span>
-            <mat-icon>content_copy</mat-icon>
-          </span>
+
+        <div class="table">
+          <div class="th">
+            <div class="td">Link</div>
+            <div class="td">Copy</div>
+            <div class="td">Open</div>
+          </div>
+
+          <div class="tr row" *ngFor="let page of pages">
+            <div class="td">{{ page.title }}</div>
+            <div class="td">
+              <div class="clickable" (click)="copy(page.type)">
+                <span>COPY</span>
+                <mat-icon>content_copy</mat-icon>
+              </div>
+            </div>
+            <div class="td">
+              <div class="clickable" (click)="open(page.type)">
+                <span>OPEN</span>
+                <mat-icon>open_in_new</mat-icon>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="link" (click)="openDiagnostics()">
-          <span class="label">
-            Go to ...
-          </span>
-          <span class="highlight">
-            <span>Diagnostics</span>
-            <mat-icon>open_in_new</mat-icon>
-          </span>
-        </div>
-        <div class="link" (click)="copyBuzzer()">
-          <span class="label">
-            Copy Link for ...
-          </span>
-          <span class="highlight">
-            <span>Buzzers</span>
-            <mat-icon>content_copy</mat-icon>
-          </span>
-        </div>
+
       </mat-card-content>
     </mat-card>
 
   </div>
 
   <div class="right-wrapper width-70">
-    <mat-form-field class="key-input" appearance="fill" color="primary">
-      <mat-label>PieSocket Key</mat-label>
-      <input matInput placeholder="enter key" [(ngModel)]="key" (ngModelChange)="term$.next($event)" />
-    </mat-form-field>
+    <mat-card class="card pale-green">
+      <mat-card-title>Piesocket Key</mat-card-title>
+      <mat-card-content>
+
+        <mat-form-field class="key-input" appearance="fill" color="primary">
+          <mat-label>PieSocket Key</mat-label>
+          <input matInput placeholder="enter key" [(ngModel)]="key" (ngModelChange)="term$.next($event)" />
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
   </div>
 
 </div>
