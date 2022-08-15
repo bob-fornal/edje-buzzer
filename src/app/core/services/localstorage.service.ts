@@ -8,19 +8,19 @@ import config from '@core/constants/config.json';
 })
 export class LocalstorageService {
 
-  constructor() { }
+  localstorage: any = localStorage;
 
-  get = (key: string): any => localStorage.getItem(key);
-  set = (key: string, value: string): any => localStorage.setItem(key, value);
-
-  setWebsocketKey = (key: string): void => {
-    const readKey: string = config.key;
-    localStorage.setItem(readKey, key);
-  };
+  get = (key: string): any => this.localstorage.getItem(key);
+  set = (key: string, value: string): any => this.localstorage.setItem(key, value);
 
   getWebsocketKey = (): string | null => {
     const readKey: string = config.key;
-    return localStorage.getItem(readKey);
+    return this.localstorage.getItem(readKey);
+  };
+
+  setWebsocketKey = (key: string): void => {
+    const readKey: string = config.key;
+    this.localstorage.setItem(readKey, key);
   };
 
 }

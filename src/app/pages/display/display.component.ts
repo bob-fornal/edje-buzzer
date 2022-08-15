@@ -20,20 +20,24 @@ export class DisplayComponent implements OnInit {
   ];
 
   constructor(
-    private route: ActivatedRoute,
-    private socket: SocketService
-  ) {
-    this.route.params.subscribe(params => {
-      const key: string = params['key'];
-      this.socket.setApiKey(key);
-
-      const colors: string = params['colors'];
-      this.handleColors(colors);
-    });
-  }
+    public route: ActivatedRoute,
+    public socket: SocketService
+  ) { }
 
   ngOnInit(): void {
+    this.initApiKey();
+    this.initColors();
   }
+
+  initApiKey = (): void => {
+    const key: any = this.route.snapshot.paramMap.get('key');
+    this.socket.setApiKey(key);
+  };
+
+  initColors = (): void => {
+    const colors: any = this.route.snapshot.paramMap.get('colors');
+    this.handleColors(colors);
+  };
 
   handleColors = (param: string): void => {
     const colors: Array<string> = param.split(',');
