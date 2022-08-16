@@ -144,14 +144,14 @@ describe('DisplayComponent', () => {
     const time: string = (1660614240000).toString();
 
     const result: string = component.getLocalTime(time);
-    expect(result).toEqual('09:44:0.000 PM');
+    expect(result).toEqual('09:44:00.000 PM');
   });
 
   it('expects "getLocalTime" to take a AM time and return correct string', () => {
     const time: string = (1660571040000).toString();
 
     const result: string = component.getLocalTime(time);
-    expect(result).toEqual('09:44:0.000 AM');
+    expect(result).toEqual('09:44:00.000 AM');
   });
 
   
