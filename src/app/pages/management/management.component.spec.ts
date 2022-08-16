@@ -13,6 +13,8 @@ import { MatInputModule } from '@angular/material/input';
 
 import { Team } from '@core/interfaces/team';
 
+import actions from '@core/constants/actions.json';
+
 describe('ManagementComponent', () => {
   let component: ManagementComponent;
   let fixture: ComponentFixture<ManagementComponent>;
@@ -207,6 +209,17 @@ describe('ManagementComponent', () => {
   
     component.countTeams();
     expect(component.teams).toEqual(expected);
+  });
+
+  it('expects "resetDisplay" to publish a buzzer reset', () => {
+    const message: any = {
+      type: actions.BUZZER_RESET,
+      payload: { }
+    };
+    spyOn(component.socket, 'publish').and.stub();
+
+    component.resetDisplay();
+    expect(component.socket.publish).toHaveBeenCalledWith(message);
   });
 
 });
