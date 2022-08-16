@@ -7,6 +7,7 @@ import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 import { LocalstorageService } from '@core/services/localstorage.service';
 import { SocketService } from '@core/services/socket.service';
 
+import { BaseMessage } from '@core/interfaces/base-message';
 import { Team } from '@core/interfaces/team';
 
 import actions from '@core/constants/actions.json';
@@ -134,6 +135,14 @@ export class ManagementComponent implements OnInit {
       const uuidTeam: string = this.users[uuid].team;
       this.teams[teamLocations[uuidTeam]].count!++;
     });
+  };
+
+  resetDisplay = (): void => {
+    const message: BaseMessage = {
+      type: actions.BUZZER_RESET,
+      payload: { }
+    };
+    this.socket.publish(message);
   };
 
 }
