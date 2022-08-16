@@ -101,7 +101,7 @@ export class DisplayComponent implements OnInit {
 
     const meridian = (hrs > 12) ? 'PM' : 'AM';
     const hours = (hrs > 12) ? hrs - 12 : hrs;
-    return `${ (hours+'').padStart(2, '0') }:${ min }:${ sec }.${ (mss+'').padStart(3, '0') } ${ meridian }`;
+    return `${ (hours+'').padStart(2, '0') }:${ (min+'').padStart(2, '0') }:${ (sec+'').padStart(2, '0') }.${ (mss+'').padStart(3, '0') } ${ meridian }`;
   };
 
   doesIndividualExist = (uuid: string): boolean => {
