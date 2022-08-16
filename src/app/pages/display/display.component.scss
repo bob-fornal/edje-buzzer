@@ -10,6 +10,24 @@
   width: 100vw;
 }
 
+.content {
+  display: flex;
+  justify-content: center;
+ 
+  .logo {
+    animation: center-animate 2s 3 ease-in-out;
+    width: 50%;
+  }
+
+  @keyframes center-animate {
+    0%   { transform: scaleX(100%); }
+    25%  { transform: scaleX(0); }
+    50%  { transform: scaleX(-100%); }
+    75%  { transform: scaleX(0); }
+    100% { transform: scaleX(100%); }
+  }
+}
+
 .display-info {
   box-sizing: border-box;
   font-size: 1rem;
