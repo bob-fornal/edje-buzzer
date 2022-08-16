@@ -1,9 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { SocketService } from '@core/services/socket.service';
 
 import { BaseMessage } from '@core/interfaces/base-message';
+
+import { SocketService } from '@core/services/socket.service';
 
 import actions from '@core/constants/actions.json';
 
