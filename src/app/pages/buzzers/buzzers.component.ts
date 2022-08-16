@@ -76,13 +76,14 @@ export class BuzzersComponent implements OnInit {
     if (this.active === false) return;
     
     this.active = !this.active;
+    const timeMS: string = (new Date()).getTime().toString();
     const message: BaseMessage = {
       type: actions.CLICKED_BUZZER,
       payload: {
         uuid: this.uuid,
         username: this.selectedUsername,
         team: this.selectedTeam,
-        time: (new Date()).toUTCString()
+        time: timeMS
       }
     };
     this.socket.publish(message);
