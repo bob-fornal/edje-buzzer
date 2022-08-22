@@ -24,6 +24,10 @@
   padding: 1rem 3rem;
 }
 
+.username--input {
+  color: white;
+}
+
 @media screen and (orientation: portrait) and (max-width: 479px) {
   .wrapper--inner {
     display: grid;
