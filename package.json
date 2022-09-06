@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "test:action": "ng test --watch=false --browsers=ChromeHeadlessCustom",
+    "test:action": "ng test --watch=false",
     "deploy": "ng build --base-href /edje-buzzer/"
   },
   "private": true,
