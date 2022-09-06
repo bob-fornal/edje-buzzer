@@ -5,8 +5,11 @@ on:
     branches:
       - master
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
     permissions:
       contents: write
     concurrency:
@@ -14,16 +17,16 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-    - uses: actions/setup-node@v2
+    - name: Uses Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
       with:
-        node-version: '18.x'
+        node-version: ${{ matrix.node-version }}
     - uses: actions/cache@v2
       with:
         path: ~/.npm
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
-
     - name: Build
       run: |
         npm install
