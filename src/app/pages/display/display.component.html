@@ -2,7 +2,34 @@
 <div class="wrapper">
   
   <div class="left-wrapper width-70">
-    LEFT
+    <mat-card class="card pale-green">
+      <mat-card-title>Results</mat-card-title>
+      <mat-card-content>
+
+        <ng-container *ngIf="individuals.length === 0">
+          <div>Waiting ...</div>
+        </ng-container>
+
+        <ng-container *ngIf="individuals.length > 0">
+          
+          <div class="table individuals">
+            <div class="th">
+              <div class="td">Team</div>
+              <div class="td">Name</div>
+              <div class="td">Time</div>
+            </div>
+
+            <div class="tr" *ngFor="let individual of individuals">
+              <div class="td">{{ getTeam(individual.team) }}</div>
+              <div class="td">{{ individual.username }}</div>
+              <div class="td">{{ getLocalTime(individual.time) }}</div>
+            </div>
+          </div>
+
+        </ng-container>
+
+      </mat-card-content>
+    </mat-card>
   </div>
   
   <div class="right-wrapper width-30">

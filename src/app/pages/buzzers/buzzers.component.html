@@ -26,6 +26,8 @@
         <mat-form-field class="team-row username" appearance="fill">
           <mat-label>Username</mat-label>
           <input matInput placeholder="Ex. Bob"
+            autocomplete="off"
+            class="username--input"
             [(ngModel)]="selectedUsername"
             [ngModelOptions]="{ standalone: true }" />
         </mat-form-field>
