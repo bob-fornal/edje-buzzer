@@ -1,7 +1,5 @@
 # Edje-Buzzer
 
-[![build status](https://github.com/coryrylan/angular-github-actions/workflows/Build/badge.svg)](https://github.com/coryrylan/angular-github-actions/actions)
-
 ## Project Goal
 
 This project is designed to accomodate three teams that can "buzz in" and attempt to answer a question.
